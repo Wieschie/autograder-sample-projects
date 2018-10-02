@@ -10,8 +10,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ComplexTests {
-    private List<Complex> cs;
-    private static List<Complex> cs_const;
+    private List<Complex> cs, cs_valid;
     // epsilon for double comparisons
     private static double eps = .0001;
 
@@ -23,34 +22,28 @@ class ComplexTests {
         );
     }
 
-    // create an unmodifiableList with the same elements to check for size effects after each test
-    @BeforeAll
-    static void init() {
-        cs_const = Collections.unmodifiableList(Arrays.asList(
-                new Complex(3.5, 5.5),
-                new Complex(-3.5, 1),
-                new Complex(5),
-                new Complex(),
-                new Complex(0, 1)
-        ));
+    private static ArrayList<Complex> get_test_data() {
+        return new ArrayList<Complex>(Arrays.asList(
+                                      new Complex(3.5, 5.5),
+                                      new Complex(-3.5, 1),
+                                      new Complex(5),
+                                      new Complex(),
+                                      new Complex(0, 1)
+                                      ));
     }
 
     @BeforeEach
     void setUp() {
-        cs = new ArrayList<>(Arrays.asList(
-                new Complex(3.5, 5.5),
-                new Complex(-3.5, 1),
-                new Complex(5),
-                new Complex(),
-                new Complex(0, 1)
-        ));
+        cs = get_test_data();
+        cs_valid = get_test_data();
     }
 
-    // check against const list to see if any side effects occurred
+    // check to see if any side effects occurred
     @AfterEach
     void tearDown() {
+        cs_valid = get_test_data();
         for (int i = 0; i < cs.size(); i++) {
-            assertEqualsComplex(cs.get(i), cs_const.get(i));
+            assertEqualsComplex(cs.get(i), cs_valid.get(i));
         }
     }
 
@@ -84,22 +77,22 @@ class ComplexTests {
 
     @Test
     void add() {
-        assertEqualsComplex(cs_const.get(3), cs.get(3).add(cs.get(3)));
-        assertEqualsComplex(cs_const.get(2), cs.get(3).add(cs.get(2)));
+        assertEqualsComplex(cs_valid.get(3), cs.get(3).add(cs.get(3)));
+        assertEqualsComplex(cs_valid.get(2), cs.get(3).add(cs.get(2)));
         assertEqualsComplex(new Complex(0, 6.5), cs.get(0).add(cs.get(1)));
     }
 
     @Test
     void subtract() {
-        assertEqualsComplex(cs_const.get(2), cs.get(2).subtract(cs.get(3)));
-        assertEqualsComplex(cs_const.get(3), cs.get(2).subtract(cs.get(2)));
+        assertEqualsComplex(cs_valid.get(2), cs.get(2).subtract(cs.get(3)));
+        assertEqualsComplex(cs_valid.get(3), cs.get(2).subtract(cs.get(2)));
         assertEqualsComplex(new Complex(7, 4.5), cs.get(0).subtract(cs.get(1)));
     }
 
     @Test
     void multiply() {
-        assertEqualsComplex(cs_const.get(3), cs.get(3).multiply(cs.get(3)));
-        assertEqualsComplex(cs_const.get(3), cs.get(2).multiply(cs.get(3)));
+        assertEqualsComplex(cs_valid.get(3), cs.get(3).multiply(cs.get(3)));
+        assertEqualsComplex(cs_valid.get(3), cs.get(2).multiply(cs.get(3)));
         assertEqualsComplex(new Complex(-17.75, -15.75), cs.get(0).multiply(cs.get(1)));
         assertEqualsComplex(new Complex(-1, 0), cs.get(4).multiply(cs.get(4)));
     }
