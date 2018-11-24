@@ -19,8 +19,9 @@ name = "Diff 1"
 type = "diff"
 points = 20
 command = "java p05.EX13_17"
-inputFile = "input.txt"
-outputFile = "output.txt"
+stdinFile = "input.txt"
+stdoutFile = "output.txt"
+stderr = ""
 
 [output]
 build = "Command `$cmd` exited with code $retval\n"

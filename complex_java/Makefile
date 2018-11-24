@@ -1,2 +1,2 @@
 clean:
-	rm -rf */out* */*.log
+	rm -rf */out* */*.log .results/*
