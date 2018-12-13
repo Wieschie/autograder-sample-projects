@@ -1,0 +1,15 @@
+Enter file name: 
+Reading in numbers.
+Number of points read is 8
+Points read...
+Reading in point: (1,1)
+Reading in point: (1,7)
+Reading in point: (5,6)
+Reading in point: (2.5,3.5)
+Reading in point: (1,7.5)
+Reading in point: (2,2)
+Reading in point: (3.4,3.1)
+Reading in point: (2.1,2.1)
+
+Minimum distance = 0.141421 is between (2,2) and (2.1,2.1)
+Maximum distance = 6.5 is between (1,1) and (1,7.5)

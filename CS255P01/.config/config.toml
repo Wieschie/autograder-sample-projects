@@ -1,0 +1,65 @@
+## location of test output
+output_dir = "out"
+
+# build steps, if required
+[build]
+# array of (file, dest) pairs that define files stored in .config, and where they should be copied to
+required_files = [ { file = 'testFile0.txt', dest = 'debug' }, { file = 'testFile1.txt', dest = 'debug'}, {file = 'testFile2.txt', dest = 'debug'} ]
+
+# defined tests - can have any number of varying types
+[[test]]
+name = "Test 0"
+type = "diff"
+points = 10
+command = "Debug/CS255P01*.exe"
+glob_command = true
+stdin = "testFile0.txt"
+stdoutFile = "testFile0Key.txt"
+
+
+[[test]]
+name = "Test 1"
+type = "diff"
+points = 10
+command = "Debug/CS255P01*.exe"
+glob_command = true
+stdin = "testFile1.txt"
+stdoutFile = "testFile1Key.txt"
+
+
+[[test]]
+name = "Test 2"
+type = "diff"
+points = 10
+command = "Debug/CS255P01*.exe"
+glob_command = true
+stdin = "testFile2.txt"
+stdoutFile = "testFile2Key.txt"
+
+
+[output]
+build = """
+Command `$cmd` exited with code $retval
+"""
+junit = """
+$name
+$points points awarded.
+Command `$cmd` exited with code $retval
+$stdout
+$stderr
+"""
+diff = """
+$name
+$points points awarded.
+Command `$cmd` exited with code $retval
+$stderr
+$diffout
+"""
+custom = """
+$name
+Command `$cmd` exited with code $retval
+$stdout
+$stderr
+"""
+
+
