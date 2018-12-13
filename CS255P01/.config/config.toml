@@ -4,7 +4,7 @@ output_dir = "out"
 # build steps, if required
 [build]
 # array of (file, dest) pairs that define files stored in .config, and where they should be copied to
-required_files = [ { file = 'testFile0.txt', dest = 'debug' }, { file = 'testFile1.txt', dest = 'debug'}, {file = 'testFile2.txt', dest = 'debug'} ]
+required_files = [ { file = 'testFile0.txt', dest = '' }, { file = 'testFile1.txt', dest = ''}, {file = 'testFile2.txt', dest = ''} ]
 
 # defined tests - can have any number of varying types
 [[test]]
@@ -15,6 +15,7 @@ command = "Debug/CS255P01*.exe"
 glob_command = true
 stdin = "testFile0.txt"
 stdoutFile = "testFile0Key.txt"
+timeout = 5
 
 
 [[test]]
@@ -25,6 +26,7 @@ command = "Debug/CS255P01*.exe"
 glob_command = true
 stdin = "testFile1.txt"
 stdoutFile = "testFile1Key.txt"
+timeout = 5
 
 
 [[test]]
@@ -35,6 +37,7 @@ command = "Debug/CS255P01*.exe"
 glob_command = true
 stdin = "testFile2.txt"
 stdoutFile = "testFile2Key.txt"
+timeout = 5
 
 
 [output]
